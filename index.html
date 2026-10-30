@@ -1,0 +1,251 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Web Security Header Analyzer</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<main class="container">
+
+    <!-- Header -->
+    <header class="hero">
+
+        <div class="eyebrow">WEB APPLICATION SECURITY</div>
+
+        <h1>Web Security Header Analyzer</h1>
+
+        <p>
+            Analyze HTTP response headers, identify missing security
+            protections and get practical remediation recommendations.
+        </p>
+
+    </header>
+
+
+    <!-- URL Input -->
+    <section class="panel">
+
+        <h2>Analyze Website</h2>
+
+        <form method="POST" action="{{ url_for('index') }}">
+
+            <label for="url">Public Website URL</label>
+
+            <div class="input-row">
+
+                <input
+                    type="text"
+                    id="url"
+                    name="url"
+                    placeholder="https://example.com"
+                    value="{{ target }}"
+                    maxlength="2048"
+                    required
+                >
+
+                <button type="submit">
+                    Analyze Headers
+                </button>
+
+            </div>
+
+            <p class="hint">
+                Only analyze websites you own or have permission to test.
+            </p>
+
+        </form>
+
+    </section>
+
+
+    <!-- Error Message -->
+    {% if error %}
+
+    <section class="alert error" role="alert">
+
+        <strong>Analysis Failed</strong>
+
+        <p>{{ error }}</p>
+
+    </section>
+
+    {% endif %}
+
+
+    <!-- Results -->
+    {% if results %}
+
+
+    <!-- Summary Cards -->
+    <section class="summary-grid">
+
+        <div class="metric panel">
+
+            <span class="metric-label">Security Score</span>
+
+            <strong>
+                {{ results.score }}<small>/100</small>
+            </strong>
+
+            <div
+                class="progress"
+                role="progressbar"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                aria-valuenow="{{ results.score }}"
+                aria-label="Security header presence score"
+            >
+
+                <span style="width: {{ results.score }}%"></span>
+
+            </div>
+
+            <p class="hint">
+                Based on the presence of checked security headers.
+            </p>
+
+        </div>
+
+
+        <div class="metric panel">
+
+            <span class="metric-label">Headers Present</span>
+
+            <strong>
+                {{ results.present_count }}
+                <small>/{{ results.total_count }}</small>
+            </strong>
+
+            <p class="hint">
+                HTTP Status: {{ results.status_code }}
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- Detailed Results -->
+    <section class="panel">
+
+        <h2>Assessment Results</h2>
+
+        <p class="target">
+            <strong>Website:</strong>
+            {{ results.url }}
+        </p>
+
+
+        <div class="table-wrap">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>Security Header</th>
+                        <th>Status</th>
+                        <th>Severity if Missing</th>
+                        <th>Description & Recommendation</th>
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    {% for item in results.findings %}
+
+                    <tr>
+
+                        <td class="header-name">
+                            {{ item.name }}
+                        </td>
+
+
+                        <td>
+
+                            <span class="status {{ item.status|lower }}">
+                                {{ item.status }}
+                            </span>
+
+                        </td>
+
+
+                        <td>
+                            {{ item.severity }}
+                        </td>
+
+
+                        <td>
+
+                            <p>
+                                {{ item.description }}
+                            </p>
+
+                            <p class="recommendation">
+                                {{ item.recommendation }}
+                            </p>
+
+                            {% if item.value %}
+
+                            <code>{{ item.value }}</code>
+
+                            {% endif %}
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <p class="disclaimer">
+
+            A present header is not necessarily configured securely.
+            Review its value and application context.
+
+            The score is an educational indicator, not a formal
+            security rating.
+
+        </p>
+
+    </section>
+
+    {% endif %}
+
+
+    <!-- Footer -->
+    <footer>
+
+        Web Security Header Analyzer
+
+        <br>
+
+        Python | Flask | Requests | HTML | CSS
+
+        <br>
+
+        Educational Use Only
+
+    </footer>
+
+</main>
+
+</body>
+</html>

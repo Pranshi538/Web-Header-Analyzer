@@ -1,0 +1,357 @@
+
+/* ==============================
+   GLOBAL VARIABLES
+================================ */
+
+:root {
+    --bg: #0b0d12;
+    --panel: #141822;
+    --border: #2a3040;
+    --text: #eef1f8;
+    --muted: #9ba5b8;
+    --accent: #8b7cff;
+    --green: #4dd4a4;
+    --red: #ff747f;
+}
+
+/* ==============================
+   GLOBAL STYLING
+================================ */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: radial-gradient(
+        ellipse at top,
+        #17172b 0%,
+        #0b0d12 55%
+    );
+    color: var(--text);
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.5;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1120px;
+    margin: auto;
+    padding: 40px 22px;
+}
+
+/* ==============================
+   HEADER SECTION
+================================ */
+
+.hero {
+    padding: 26px 0 30px;
+}
+
+.eyebrow {
+    color: var(--accent);
+    font-size: 13px;
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+
+h1 {
+    font-size: clamp(30px, 5vw, 48px);
+    margin: 12px 0;
+    letter-spacing: -1px;
+}
+
+.hero p {
+    color: var(--muted);
+    max-width: 650px;
+    font-size: 15px;
+}
+
+/* ==============================
+   PANEL DESIGN
+================================ */
+
+.panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px;
+    margin-bottom: 20px;
+}
+
+h2 {
+    margin-top: 0;
+    margin-bottom: 18px;
+    font-size: 21px;
+}
+
+/* ==============================
+   INPUT FORM
+================================ */
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.input-row {
+    display: flex;
+    gap: 12px;
+}
+
+input {
+    flex: 1;
+    min-width: 0;
+    padding: 13px;
+    border: 1px solid #394156;
+    border-radius: 8px;
+    background: #0d1018;
+    color: white;
+    font-size: 15px;
+    outline: none;
+}
+
+input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px rgba(139, 124, 255, 0.15);
+}
+
+input::placeholder {
+    color: #727d91;
+}
+
+button {
+    border: none;
+    border-radius: 8px;
+    padding: 13px 20px;
+    background: var(--accent);
+    color: #0b0d12;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+button:hover {
+    filter: brightness(1.15);
+    transform: translateY(-1px);
+}
+
+.hint {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 10px;
+}
+
+/* ==============================
+   ERROR MESSAGE
+================================ */
+
+.alert {
+    padding: 15px;
+    border-radius: 9px;
+    margin-bottom: 20px;
+}
+
+.error {
+    background: #321a22;
+    border: 1px solid #713341;
+    color: #ffc1c7;
+}
+
+/* ==============================
+   SUMMARY CARDS
+================================ */
+
+.summary-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.metric {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.metric-label {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.metric strong {
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.metric strong small {
+    font-size: 16px;
+    color: var(--muted);
+}
+
+/* ==============================
+   SECURITY SCORE PROGRESS BAR
+================================ */
+
+.progress {
+    height: 9px;
+    width: 100%;
+    background: #292f40;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.progress span {
+    display: block;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        var(--accent),
+        var(--green)
+    );
+    transition: width 0.5s ease;
+}
+
+/* ==============================
+   ASSESSMENT RESULTS
+================================ */
+
+.target {
+    color: var(--muted);
+    overflow-wrap: anywhere;
+    font-size: 14px;
+}
+
+.table-wrap {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    min-width: 750px;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 14px 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+}
+
+th {
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+td {
+    font-size: 14px;
+}
+
+.header-name {
+    font-weight: bold;
+    overflow-wrap: anywhere;
+}
+
+/* ==============================
+   PRESENT / MISSING STATUS
+================================ */
+
+.status {
+    display: inline-block;
+    border-radius: 20px;
+    padding: 4px 10px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.present {
+    color: var(--green);
+    background: #12372f;
+}
+
+.missing {
+    color: var(--red);
+    background: #3b2028;
+}
+
+/* ==============================
+   RECOMMENDATIONS
+================================ */
+
+.recommendation {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+code {
+    display: inline-block;
+    max-width: 350px;
+    overflow-wrap: anywhere;
+    white-space: normal;
+    color: #d4ceff;
+    background: #0c0f17;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 12px;
+}
+
+/* ==============================
+   DISCLAIMER
+================================ */
+
+.disclaimer {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 20px;
+    line-height: 1.7;
+}
+
+/* ==============================
+   FOOTER
+================================ */
+
+footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+    padding-top: 20px;
+    line-height: 2;
+}
+
+/* ==============================
+   RESPONSIVE DESIGN
+================================ */
+
+@media screen and (max-width: 650px) {
+
+    .container {
+        padding: 22px 14px;
+    }
+
+    .input-row {
+        flex-direction: column;
+    }
+
+    .summary-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .panel {
+        padding: 17px;
+    }
+
+    h1 {
+        font-size: 30px;
+    }
+
+    button {
+        width: 100%;
+    }
+}
